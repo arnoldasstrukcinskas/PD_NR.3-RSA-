@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>436</width>
-    <height>470</height>
+    <width>454</width>
+    <height>569</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -23,7 +23,7 @@
       </font>
      </property>
      <property name="text">
-      <string>AES šifravimo aplikacija</string>
+      <string>RES šifravimo aplikacija</string>
      </property>
      <property name="alignment">
       <set>Qt::AlignCenter</set>
@@ -41,94 +41,175 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="cypherModeLabel">
-     <property name="text">
-      <string>Režimas</string>
-     </property>
-    </widget>
-   </item>
-   <item>
-    <widget class="QComboBox" name="cypherModeComboBox">
-     <item>
-      <property name="text">
-       <string>Pasirinkite</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>ECB</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>CBC</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>CFB</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item>
     <widget class="QLabel" name="label">
+     <property name="font">
+      <font>
+       <bold>true</bold>
+      </font>
+     </property>
      <property name="text">
-      <string>Rakto ilgis</string>
+      <string>Pradiniai duomenys:</string>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout_2">
+    <layout class="QHBoxLayout" name="dataLabelsLayout">
      <item>
-      <widget class="QRadioButton" name="bits128RadioButton">
+      <widget class="QLabel" name="pValueLabel">
+       <property name="font">
+        <font>
+         <bold>false</bold>
+        </font>
+       </property>
        <property name="text">
-        <string>128 bitai</string>
+        <string>p - reikšmė</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QRadioButton" name="bits192RadioButton">
-       <property name="text">
-        <string>192 bitai</string>
+      <widget class="QLabel" name="qValueLabel">
+       <property name="font">
+        <font>
+         <bold>false</bold>
+        </font>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QRadioButton" name="bits256RadioButton">
        <property name="text">
-        <string>256 bitai</string>
+        <string>q - reikšmė</string>
        </property>
       </widget>
      </item>
     </layout>
    </item>
    <item>
-    <widget class="QLabel" name="keyLabel">
-     <property name="text">
-      <string>Įveskite raktą:</string>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayout_2">
+     <item>
+      <widget class="QSpinBox" name="pValueSpinBox"/>
+     </item>
+     <item>
+      <widget class="QSpinBox" name="qValueSpinBox"/>
+     </item>
+    </layout>
    </item>
    <item>
-    <widget class="QPlainTextEdit" name="keyTextEdit">
-     <property name="maximumSize">
-      <size>
-       <width>16777215</width>
-       <height>50</height>
-      </size>
-     </property>
-    </widget>
+    <layout class="QHBoxLayout" name="resultDataLayout">
+     <item>
+      <widget class="QLineEdit" name="pValueResultLabel">
+       <property name="autoFillBackground">
+        <bool>false</bool>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(177, 177, 177);</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="qValueResultLabel">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(177, 177, 177);</string>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="QLabel" name="inputLabel">
      <property name="text">
-      <string>Įveskite frazę, kurią šifruosite</string>
+      <string>Įveskite frazę, kurią šifruosite (x)</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QTextEdit" name="inputTextEdit"/>
+   </item>
+   <item>
+    <widget class="QLabel" name="resultTitleLabel">
+     <property name="font">
+      <font>
+       <pointsize>12</pointsize>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>REZULTATAS</string>
+     </property>
+     <property name="alignment">
+      <set>Qt::AlignCenter</set>
+     </property>
+    </widget>
+   </item>
+   <item>
+    <layout class="QVBoxLayout" name="keysLayout">
+     <item>
+      <widget class="QLabel" name="globalKeyLabel">
+       <property name="text">
+        <string>Viešas raktas: </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="globalKeyLineEdit">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(168, 250, 155);</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="privateKeyLabel">
+       <property name="text">
+        <string>Privatus raktas</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="privateKeyLineEdit">
+       <property name="styleSheet">
+        <string notr="true">background-color: rgb(255, 99, 102);</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <widget class="QLabel" name="nValueLabel_2">
+         <property name="text">
+          <string>n - reikšmė</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="qValueLabel_2">
+         <property name="text">
+          <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; ɸ - reikšmė&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout">
+       <item>
+        <widget class="QLineEdit" name="nValueLabel">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(177, 177, 177);</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLineEdit" name="fiValueLabel">
+         <property name="styleSheet">
+          <string notr="true">background-color: rgb(177, 177, 177);</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
    <item>
     <widget class="Line" name="line_2">
@@ -138,16 +219,16 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="resultLabel_2">
+    <widget class="QLabel" name="resultLabel">
      <property name="text">
-      <string>Rezultatas:</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rezultata:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
    <item>
     <widget class="QPlainTextEdit" name="resultTextEdit">
      <property name="styleSheet">
-      <string notr="true">background-color: rgb(177, 177, 177);</string>
+      <string notr="true">background-color: rgb(254, 255, 184);</string>
      </property>
      <property name="readOnly">
       <bool>true</bool>
@@ -155,14 +236,14 @@
     </widget>
    </item>
    <item>
-    <widget class="QLabel" name="resultLabel">
+    <widget class="QLabel" name="emptySpace">
      <property name="text">
       <string/>
      </property>
     </widget>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout">
+    <layout class="QHBoxLayout" name="buttonsLayout">
      <item>
       <widget class="QPushButton" name="cypherPushButton">
        <property name="text">
