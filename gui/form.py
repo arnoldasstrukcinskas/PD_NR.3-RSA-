@@ -18,19 +18,29 @@ class FormWidget(Ui_Form, QWidget):
         self.encryptor = Encryptor()
 
         self.cypherPushButton.clicked.connect(self.cypher)
+        self.decypherPushButton.clicked.connect(self.decypher)
 
     def cypher(self):
         self.encryptor.pValue = self.pValueSpinBox.value()
         self.encryptor.qValue = self.qValueSpinBox.value()
         self.encryptor.text = self.inputTextEdit.toPlainText()
-        self.pValueResultLabel.setText(str(self.encryptor.pValue))
-        self.qValueResultLabel.setText(str(self.encryptor.qValue))
         cyphered_text = self.encryptor.cypher()
         self.setPublicKey()
+        self.nValueTextEdit.setText(str(self.encryptor.nValue))
+        self.fiValueTextEdit.setText(str(self.encryptor.fiValue))
         self.resultTextEdit.setPlainText(str(cyphered_text))
         print(f"n value - {self.encryptor.nValue}")
 
+    def decypher(self):
+        decyphered_text = self.encryptor.decypher()
+        self.setPrivateKey()
+        self.inputTextEdit.setPlainText(str(self.encryptor.ciphered_text))
+        self.resultTextEdit.setPlainText(str(decyphered_text))
+
     def setPublicKey(self):
         self.globalKeyLineEdit.setText(
-            f"Key(pub) = ({self.encryptor.nValue}, {self.encryptor.eValue})"
+            f"Key(pub) = (n, e) = ({self.encryptor.nValue}, {self.encryptor.eValue})"
         )
+
+    def setPrivateKey(self):
+        self.privateKeyLineEdit.setText(f"Key(priv) = d = ({self.encryptor.dValue})")

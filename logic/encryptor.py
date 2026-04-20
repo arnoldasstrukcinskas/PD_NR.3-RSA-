@@ -18,7 +18,8 @@ class Encryptor(QObject):
         self.fiValue: int = None
         self.eValue: int = None
         self.eValues: list = []
-        self.dvalues: list = []
+        self.dValue: list = []
+        self.dValues: list = []
 
     def findN(self) -> None:
         self.nValue = self.pValue * self.qValue
@@ -47,12 +48,12 @@ class Encryptor(QObject):
 
         for d in range(3, self.fiValue * 10):
             if (d * self.eValue) % self.fiValue == 1:
-                self.dvalues.append(d)
+                self.dValues.append(d)
 
-            if len(self.dvalues) >= 5:
+            if len(self.dValues) >= 5:
                 break
 
-        print(self.dvalues)
+        print(self.dValues)
 
     def cypher(self):
         self.findN()
@@ -61,13 +62,23 @@ class Encryptor(QObject):
         self.findDValue()
         x = self.convertToDecimal()
 
-        ciphered_text = []
+        self.ciphered_text = []
 
         for code in x:
             y = code**self.eValue % self.nValue
-            ciphered_text.append(y)
+            self.ciphered_text.append(y)
 
-        return ciphered_text
+        return self.ciphered_text
+
+    def decypher(self):
+        deciphered_text = ""
+        self.dValue = self.dValues[2]
+
+        for code in self.ciphered_text:
+            x = code**self.dValue % self.nValue
+            deciphered_text += chr(x)
+
+        return deciphered_text
 
     def convertToDecimal(self):
         desimtainis_kodas = []

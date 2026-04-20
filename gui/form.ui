@@ -91,33 +91,6 @@
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="resultDataLayout">
-     <item>
-      <widget class="QLineEdit" name="pValueResultLabel">
-       <property name="autoFillBackground">
-        <bool>false</bool>
-       </property>
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(177, 177, 177);</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="qValueResultLabel">
-       <property name="styleSheet">
-        <string notr="true">background-color: rgb(177, 177, 177);</string>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
     <widget class="QLabel" name="inputLabel">
      <property name="text">
       <string>Įveskite frazę, kurią šifruosite (x)</string>
@@ -157,6 +130,9 @@
        <property name="styleSheet">
         <string notr="true">background-color: rgb(168, 250, 155);</string>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
@@ -171,19 +147,22 @@
        <property name="styleSheet">
         <string notr="true">background-color: rgb(255, 99, 102);</string>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3">
        <item>
-        <widget class="QLabel" name="nValueLabel_2">
+        <widget class="QLabel" name="nValueLabel">
          <property name="text">
           <string>n - reikšmė</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="qValueLabel_2">
+        <widget class="QLabel" name="fiValueLabel">
          <property name="text">
           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt; ɸ - reikšmė&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
          </property>
@@ -194,14 +173,14 @@
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
        <item>
-        <widget class="QLineEdit" name="nValueLabel">
+        <widget class="QLineEdit" name="nValueTextEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(177, 177, 177);</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="fiValueLabel">
+        <widget class="QLineEdit" name="fiValueTextEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(177, 177, 177);</string>
          </property>
@@ -221,7 +200,7 @@
    <item>
     <widget class="QLabel" name="resultLabel">
      <property name="text">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rezultata:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Rezultatas:&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
      </property>
     </widget>
    </item>
