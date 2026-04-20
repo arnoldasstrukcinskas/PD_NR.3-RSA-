@@ -21,20 +21,19 @@ class Encryptor(QObject):
         self.dValue: list = []
         self.dValues: list = []
 
-    def findN(self) -> None:
+    def find_n(self) -> None:
         self.nValue = self.pValue * self.qValue
 
-    def calculateFi(self) -> None:
+    def calculate_fi(self) -> None:
         self.fiValue = (self.pValue - 1) * (self.qValue - 1)
 
-    def getEValue(self) -> None:
+    def get_e_value(self) -> None:
         for e in range(3, (self.fiValue + 1), 2):  # +1 for inclusion of last odd number
             gcd = self.euclidean_algorythm(self.fiValue, e)
             if gcd == 1:
                 self.eValues.append(e)
 
         self.eValue = self.eValues[1]
-        print(f"e value - {self.eValue}")
 
     def euclidean_algorythm(self, a, b) -> int:
         while b != 0:
@@ -43,7 +42,33 @@ class Encryptor(QObject):
             b = remainder
         return a
 
-    def findDValue(self):
+    def extented_euclidean_algorythm(self, a, b):
+        r0 = a
+        r1 = b
+        s0 = 1
+        s1 = 0
+        t0 = 0
+        t1 = 1
+
+        while r1 != 0:
+            q = int(r0 / r1)
+
+            r2 = r0 - q * r1
+            s2 = s0 - q * s1
+            t2 = t0 - q * t1
+
+            r0 = r1
+            r1 = r2
+
+            s0 = s1
+            s1 = s2
+
+            t0 = t1
+            t1 = t2
+
+        return t0
+
+    def find_d_value(self):
         self.dValues = []
 
         for d in range(3, self.fiValue * 10):
@@ -56,11 +81,11 @@ class Encryptor(QObject):
         print(self.dValues)
 
     def cypher(self):
-        self.findN()
-        self.calculateFi()
-        self.getEValue()
-        self.findDValue()
-        x = self.convertToDecimal()
+        self.find_n()
+        self.calculate_fi()
+        self.get_e_value()
+        self.find_d_value()
+        x = self.convert_to_decimal()
 
         self.ciphered_text = []
 
@@ -72,7 +97,8 @@ class Encryptor(QObject):
 
     def decypher(self):
         deciphered_text = ""
-        self.dValue = self.dValues[2]
+        # self.dValue = self.dValues[2]
+        self.dValue = self.extented_euclidean_algorythm(self.fiValue, self.eValue)
 
         for code in self.ciphered_text:
             x = code**self.dValue % self.nValue
@@ -80,7 +106,7 @@ class Encryptor(QObject):
 
         return deciphered_text
 
-    def convertToDecimal(self):
+    def convert_to_decimal(self):
         desimtainis_kodas = []
         for raide in self.text:
             kodas = ord(raide)

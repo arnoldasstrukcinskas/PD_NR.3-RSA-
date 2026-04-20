@@ -29,7 +29,6 @@ class FormWidget(Ui_Form, QWidget):
         self.nValueTextEdit.setText(str(self.encryptor.nValue))
         self.fiValueTextEdit.setText(str(self.encryptor.fiValue))
         self.resultTextEdit.setPlainText(str(cyphered_text))
-        print(f"n value - {self.encryptor.nValue}")
 
     def decypher(self):
         decyphered_text = self.encryptor.decypher()

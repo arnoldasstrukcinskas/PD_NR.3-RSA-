@@ -8,7 +8,7 @@ if __name__ == "__main__":
     app = QApplication(sys.argv)
 
     screen = MainWindow()
-    screen.resize(600, 800)
+    screen.resize(500, 700)
     screen.show()
 
     sys.exit(app.exec_())
