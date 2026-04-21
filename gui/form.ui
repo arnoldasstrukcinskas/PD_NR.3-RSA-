@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>359</width>
-    <height>539</height>
+    <width>375</width>
+    <height>549</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -87,6 +87,13 @@
      </item>
      <item>
       <widget class="QSpinBox" name="qValueSpinBox"/>
+     </item>
+     <item>
+      <widget class="QCheckBox" name="euclideanCheckBox">
+       <property name="text">
+        <string>Euklido(išplėstas)</string>
+       </property>
+      </widget>
      </item>
     </layout>
    </item>
@@ -175,7 +182,7 @@
        <item>
         <widget class="QLineEdit" name="nValueTextEdit">
          <property name="styleSheet">
-          <string notr="true">background-color: rgb(177, 177, 177);</string>
+          <string notr="true"/>
          </property>
         </widget>
        </item>
@@ -183,6 +190,9 @@
         <widget class="QLineEdit" name="fiValueTextEdit">
          <property name="styleSheet">
           <string notr="true">background-color: rgb(177, 177, 177);</string>
+         </property>
+         <property name="readOnly">
+          <bool>true</bool>
          </property>
         </widget>
        </item>

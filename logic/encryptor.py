@@ -1,4 +1,4 @@
-import math
+import ast
 import os
 
 from PyQt5.QtCore import *
@@ -8,7 +8,6 @@ from PyQt5.QtWidgets import QMessageBox
 class Encryptor(QObject):
     def __init__(self):
         super().__init__()
-        print("encryptor starter")
         self.pValue: int = None
         self.qValue: int = None
         self.text: str = None
@@ -20,6 +19,9 @@ class Encryptor(QObject):
         self.eValues: list = []
         self.dValue: list = []
         self.dValues: list = []
+        self.save_dir: str = "data"
+        self.data: dict = {}
+        self.extendedEuclidean: bool = False
 
     def find_n(self) -> None:
         self.nValue = self.pValue * self.qValue
@@ -97,11 +99,21 @@ class Encryptor(QObject):
 
     def decypher(self):
         deciphered_text = ""
-        # self.dValue = self.dValues[2]
-        self.dValue = self.extented_euclidean_algorythm(self.fiValue, self.eValue)
+
+        if not self.extendedEuclidean:
+            print("----------------------Paprastas----------------------")
+            self.find_d_value()
+            self.dValue = self.dValues[1]
+        else:
+            print("----------------------Isplestinis----------------------")
+            self.dValue = self.extented_euclidean_algorythm(self.fiValue, self.eValue)
+
+        if not self.pValue and not self.qValue:
+            self.find_qp_values()
 
         for code in self.ciphered_text:
-            x = code**self.dValue % self.nValue
+            # x = code**self.dValue % self.nValue  # maziems skaiciams
+            x = pow(code, self.dValue, self.nValue)
             deciphered_text += chr(x)
 
         return deciphered_text
@@ -113,3 +125,44 @@ class Encryptor(QObject):
             desimtainis_kodas.append(kodas)
 
         return desimtainis_kodas
+
+    def write_to_txt(self):
+        os.makedirs(self.save_dir, exist_ok=True)
+
+        self.data["pValue"] = self.pValue
+        self.data["qValue"] = self.qValue
+        self.data["nValue"] = self.nValue
+        self.data["eValue"] = self.eValue
+        self.data["fiValue"] = self.fiValue
+        self.data["cyphered_text"] = self.ciphered_text
+
+        file_path = os.path.join(self.save_dir, "saved.txt")
+
+        with open(file_path, "w", encoding="utf-8") as f:
+            for key, value in self.data.items():
+                f.write(f"{key}: {value}\n")
+
+    def read_from_txt(self):
+        self.data = {}
+
+        file_path = os.path.join("data/saved.txt")
+
+        with open(file_path, "r", encoding="utf-8") as f:
+            for row in f:
+                key, value = row.strip().split(": ", 1)
+                self.data[key] = value
+
+        print(self.data)
+
+        self.qValue = int(self.data["qValue"])
+        self.pValue = int(self.data["pValue"])
+        self.nValue = int(self.data["nValue"])
+        self.eValue = int(self.data["eValue"])
+        self.fiValue = int(self.data["fiValue"])
+        self.ciphered_text = ast.literal_eval(self.data["cyphered_text"])
+
+    def find_qp_values(self):
+        for number in range(1, self.nValue):
+            if self.nValue % number == 0:
+                self.pValue = number
+                self.qValue = self.nValue // number
