@@ -83,10 +83,18 @@
    <item>
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
-      <widget class="QSpinBox" name="pValueSpinBox"/>
+      <widget class="QSpinBox" name="pValueSpinBox">
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
      </item>
      <item>
-      <widget class="QSpinBox" name="qValueSpinBox"/>
+      <widget class="QSpinBox" name="qValueSpinBox">
+       <property name="maximum">
+        <number>1000</number>
+       </property>
+      </widget>
      </item>
      <item>
       <widget class="QCheckBox" name="euclideanCheckBox">

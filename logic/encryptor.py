@@ -68,7 +68,7 @@ class Encryptor(QObject):
             t0 = t1
             t1 = t2
 
-        return t0
+        return t0 % self.fiValue
 
     def find_d_value(self):
         self.dValues = []
@@ -80,7 +80,7 @@ class Encryptor(QObject):
             if len(self.dValues) >= 5:
                 break
 
-        print(self.dValues)
+        print(f"d values: {self.dValues}")
 
     def cypher(self):
         self.find_n()
@@ -100,6 +100,9 @@ class Encryptor(QObject):
     def decypher(self):
         deciphered_text = ""
 
+        if not self.pValue and not self.qValue:
+            self.find_qp_values()
+
         if not self.extendedEuclidean:
             print("----------------------Paprastas----------------------")
             self.find_d_value()
@@ -107,9 +110,6 @@ class Encryptor(QObject):
         else:
             print("----------------------Isplestinis----------------------")
             self.dValue = self.extented_euclidean_algorythm(self.fiValue, self.eValue)
-
-        if not self.pValue and not self.qValue:
-            self.find_qp_values()
 
         for code in self.ciphered_text:
             # x = code**self.dValue % self.nValue  # maziems skaiciams
@@ -129,11 +129,11 @@ class Encryptor(QObject):
     def write_to_txt(self):
         os.makedirs(self.save_dir, exist_ok=True)
 
-        self.data["pValue"] = self.pValue
-        self.data["qValue"] = self.qValue
+        # self.data["pValue"] = 0
+        # self.data["qValue"] = 0
         self.data["nValue"] = self.nValue
         self.data["eValue"] = self.eValue
-        self.data["fiValue"] = self.fiValue
+        # self.data["fiValue"] = 0
         self.data["cyphered_text"] = self.ciphered_text
 
         file_path = os.path.join(self.save_dir, "saved.txt")
@@ -154,11 +154,11 @@ class Encryptor(QObject):
 
         print(self.data)
 
-        self.qValue = int(self.data["qValue"])
-        self.pValue = int(self.data["pValue"])
+        # self.qValue = int(self.data["qValue"])
+        # self.pValue = int(self.data["pValue"])
         self.nValue = int(self.data["nValue"])
         self.eValue = int(self.data["eValue"])
-        self.fiValue = int(self.data["fiValue"])
+        # self.fiValue = int(self.data["fiValue"])
         self.ciphered_text = ast.literal_eval(self.data["cyphered_text"])
 
     def find_qp_values(self):
@@ -166,3 +166,5 @@ class Encryptor(QObject):
             if self.nValue % number == 0:
                 self.pValue = number
                 self.qValue = self.nValue // number
+
+        self.calculate_fi()

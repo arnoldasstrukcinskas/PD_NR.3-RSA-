@@ -48,6 +48,9 @@ class FormWidget(Ui_Form, QWidget):
             self.qValueSpinBox.setValue(int(self.encryptor.qValue))
             self.set_q_value(self.encryptor.qValue)
 
+        self.pValueSpinBox.setValue(int(self.encryptor.pValue))
+        self.qValueSpinBox.setValue(int(self.encryptor.qValue))
+
     def setPublicKey(self):
         self.globalKeyLineEdit.setText(
             f"Key(pub) = (n, e) = ({self.encryptor.nValue}, {self.encryptor.eValue})"
@@ -65,8 +68,6 @@ class FormWidget(Ui_Form, QWidget):
         self.globalKeyLineEdit.setText("")
         self.resultTextEdit.setPlainText("")
         self.nValueTextEdit.setText("")
-        self.pValueSpinBox.setValue(int(self.encryptor.pValue))
-        self.qValueSpinBox.setValue(int(self.encryptor.qValue))
         self.inputTextEdit.setPlainText(str(self.encryptor.ciphered_text))
 
     def set_p_value(self, value: int):
